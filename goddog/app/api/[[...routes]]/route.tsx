@@ -11,7 +11,6 @@ let currentSlide: number = 1;
 const app = new Frog({
   assetsPath: "/",
   basePath: "/api",
-  hub: pinata(),
   // Supply a Hub to enable frame verification.
   // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
 });
