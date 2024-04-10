@@ -5,11 +5,13 @@ import { devtools } from "frog/dev";
 // import { neynar } from 'frog/hubs'
 import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
+import { pinata } from "frog/hubs";
 let currentSlide: number = 1;
 
 const app = new Frog({
   assetsPath: "/",
   basePath: "/api",
+  hub: pinata(),
   // Supply a Hub to enable frame verification.
   // hub: neynar({ apiKey: 'NEYNAR_FROG_FM' })
 });
@@ -52,6 +54,35 @@ app.frame("/slides", (c) => {
         ],
       });
     } else if (currentSlide === 5) {
+      currentSlide = 1;
+      return c.res({
+        image: `http://localhost:3000/slide${currentSlide}.png`,
+        intents: [
+          <Button value="previous">⏪</Button>,
+          <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
+          <Button.Link href="https://interchain.axelar.dev/base/0xDDf7d080C82b8048BAAe54e376a3406572429b4e">
+            Interchain
+          </Button.Link>,
+          <Button value="next">⏩</Button>,
+        ],
+      });
+    }
+  }
+  if (buttonValue == "previous") {
+    if (currentSlide !== 1) {
+      --currentSlide;
+      return c.res({
+        image: `http://localhost:3000/slide${currentSlide}.png`,
+        intents: [
+          <Button value="previous">⏪</Button>,
+          <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
+          <Button.Link href="https://interchain.axelar.dev/base/0xDDf7d080C82b8048BAAe54e376a3406572429b4e">
+            Interchain
+          </Button.Link>,
+          <Button value="next">⏩</Button>,
+        ],
+      });
+    } else if (currentSlide === 1) {
       currentSlide = 1;
       return c.res({
         image: `http://localhost:3000/slide${currentSlide}.png`,
