@@ -7,7 +7,7 @@ import { handle } from "frog/next";
 import { serveStatic } from "frog/serve-static";
 import { pinata } from "frog/hubs";
 let currentSlide: number = 1;
-
+const path = `${process.env.VERCEL_URL || "http://localhost:3000"}/api`;
 const app = new Frog({
   assetsPath: "/",
   basePath: "/api",
@@ -22,7 +22,7 @@ app.frame("/", (c) => {
   const { buttonValue } = c;
   console.log(buttonValue);
   return c.res({
-    image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide1.png`,
+    image: `${path}/slide1.png`,
     action: "/slides",
     intents: [
       <Button value="previous">⏪</Button>,
@@ -43,7 +43,7 @@ app.frame("/slides", (c) => {
     if (currentSlide !== 5) {
       ++currentSlide;
       return c.res({
-        image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide${currentSlide}.png`,
+        image: `${path}/slide${currentSlide}.png`,
         intents: [
           <Button value="previous">⏪</Button>,
           <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
@@ -56,7 +56,7 @@ app.frame("/slides", (c) => {
     } else if (currentSlide === 5) {
       currentSlide = 1;
       return c.res({
-        image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide${currentSlide}.png`,
+        image: `${path}/slide${currentSlide}.png`,
         intents: [
           <Button value="previous">⏪</Button>,
           <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
@@ -72,7 +72,7 @@ app.frame("/slides", (c) => {
     if (currentSlide !== 1) {
       --currentSlide;
       return c.res({
-        image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide${currentSlide}.png`,
+        image: `${path}/slide${currentSlide}.png`,
         intents: [
           <Button value="previous">⏪</Button>,
           <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
@@ -85,7 +85,7 @@ app.frame("/slides", (c) => {
     } else if (currentSlide === 1) {
       currentSlide = 1;
       return c.res({
-        image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide${currentSlide}.png`,
+        image: `${path}/slide${currentSlide}.png`,
         intents: [
           <Button value="previous">⏪</Button>,
           <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
@@ -98,7 +98,7 @@ app.frame("/slides", (c) => {
     }
   }
   return c.res({
-    image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide1.png`,
+    image: `${path}/slide1.png`,
     intents: [
       <Button value="previous">⏪</Button>,
       <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
