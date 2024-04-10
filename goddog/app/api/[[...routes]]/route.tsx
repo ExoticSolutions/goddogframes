@@ -17,11 +17,12 @@ const app = new Frog({
 
 // Uncomment to use Edge Runtime
 // export const runtime = 'edge'
+
 app.frame("/", (c) => {
   const { buttonValue } = c;
   console.log(buttonValue);
   return c.res({
-    image: "http://localhost:3000/slide1.png",
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide1.png`,
     action: "/slides",
     intents: [
       <Button value="previous">⏪</Button>,
@@ -42,7 +43,7 @@ app.frame("/slides", (c) => {
     if (currentSlide !== 5) {
       ++currentSlide;
       return c.res({
-        image: `http://localhost:3000/slide${currentSlide}.png`,
+        image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide${currentSlide}.png`,
         intents: [
           <Button value="previous">⏪</Button>,
           <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
@@ -55,7 +56,7 @@ app.frame("/slides", (c) => {
     } else if (currentSlide === 5) {
       currentSlide = 1;
       return c.res({
-        image: `http://localhost:3000/slide${currentSlide}.png`,
+        image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide${currentSlide}.png`,
         intents: [
           <Button value="previous">⏪</Button>,
           <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
@@ -71,7 +72,7 @@ app.frame("/slides", (c) => {
     if (currentSlide !== 1) {
       --currentSlide;
       return c.res({
-        image: `http://localhost:3000/slide${currentSlide}.png`,
+        image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide${currentSlide}.png`,
         intents: [
           <Button value="previous">⏪</Button>,
           <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
@@ -84,7 +85,7 @@ app.frame("/slides", (c) => {
     } else if (currentSlide === 1) {
       currentSlide = 1;
       return c.res({
-        image: `http://localhost:3000/slide${currentSlide}.png`,
+        image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide${currentSlide}.png`,
         intents: [
           <Button value="previous">⏪</Button>,
           <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
@@ -97,7 +98,7 @@ app.frame("/slides", (c) => {
     }
   }
   return c.res({
-    image: "http://localhost:3000/slide1.png",
+    image: `${process.env.NEXT_PUBLIC_SITE_URL}/slide1.png`,
     intents: [
       <Button value="previous">⏪</Button>,
       <Button.Link href="https://t.me/goddogportal">Socials</Button.Link>,
